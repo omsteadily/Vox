@@ -1,0 +1,1550 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Olmstead\_Assignment\_5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{San Francisco Bikeshare
+Analysis}\label{san-francisco-bikeshare-analysis}
+
+\subsection{w205.6 (Crook)}\label{w205.6-crook}
+
+\subsection{Daniel Olmstead}\label{daniel-olmstead}
+
+\subsubsection{Objective}\label{objective}
+
+For this analysis, I want to look at the bikeshare data to determine
+usage patterns in order to craft promotional campaigns to drive usage.
+Specifically, I will examine the feasibility of using the bikes
+themselves as a means of delivering differentiated promotions to
+targeted user groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Package imports}
+        \PY{k+kn}{import} \PY{n+nn}{redis}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{gmaps}
+        \PY{k+kn}{import} \PY{n+nn}{gmaps}\PY{n+nn}{.}\PY{n+nn}{datasets}
+        \PY{n}{gmaps}\PY{o}{.}\PY{n}{configure}\PY{p}{(}\PY{n}{api\PYZus{}key}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AIzaSyBgoN4sl9HiFHKhFF6WPKI1b1ufYX\PYZhy{}wi\PYZhy{}8}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{q\PYZus{}weekday\PYZus{}trips} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  EXTRACT(HOUR}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    start\PYZus{}date) AS hour,}
+         \PY{l+s+s2}{  COUNT(*)}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{GROUP BY}
+         \PY{l+s+s2}{  hour}
+         \PY{l+s+s2}{ORDER BY}
+         \PY{l+s+s2}{  hour ASC}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{q\PYZus{}weekend\PYZus{}trips} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  EXTRACT(HOUR}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    start\PYZus{}date) AS hour,}
+         \PY{l+s+s2}{  COUNT(*)}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{  OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6}
+         \PY{l+s+s2}{GROUP BY}
+         \PY{l+s+s2}{  hour}
+         \PY{l+s+s2}{ORDER BY}
+         \PY{l+s+s2}{  hour ASC}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}weekday\PYZus{}trips}\PY{l+s+s2}{\PYZdq{}} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}weekend\PYZus{}trips}\PY{l+s+s2}{\PYZdq{}} 
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} weekday\PYZus{}trips.csv
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}2}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} weekend\PYZus{}trips.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r7bff713570f6d2a4\_000001640c21d895\_1 {\ldots} (4s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{weekday\PYZus{}trips}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday\PYZus{}trips.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{weekend\PYZus{}trips}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekend\PYZus{}trips.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hour}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{index\PYZus{}col}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{weekday\PYZus{}avg}\PY{p}{,} \PY{n}{weekend\PYZus{}avg} \PY{o}{=} \PY{n}{weekday\PYZus{}trips}\PY{o}{/}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{weekend\PYZus{}trips}\PY{o}{/}\PY{l+m+mi}{2}
+         \PY{n}{trips} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{weekday\PYZus{}avg}\PY{p}{,} \PY{n}{weekend\PYZus{}avg}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{join\PYZus{}axes}\PY{o}{=}\PY{p}{[}\PY{n}{weekday\PYZus{}avg}\PY{o}{.}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+         \PY{n}{trips}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Avg. Trips per hour on Weekday/Weekend}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mf}{1.5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f23f82b6438>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that on weekdays, usage is clearly bimodal with peaks
+corresponding to commute times between 7-10am and 4-7pm. Weekend usage
+appears largely normal, with peak at 1pm but a broad standard deviation
+on either side. It is also far smaller than weekend usage, with peak
+usage approximately equal to the lowest lull on weekday afternoons, and
+less than 1/5th of peak weekday usage.
+
+\subsection{Commuters}\label{commuters}
+
+Clearly the predominate use case for GoBikes is commuting, so we'll try
+to understand more about about these riders. If we want to target these
+riders, we'll need to know where they are. To that end, we'll determine
+\textbf{What are the most popular departure docks for commuters on
+weekday morning and evenings, and are they subscribers or single-use
+riders?} (here defined as 6-9am and 4-7pm, respectively). Are there just
+a few heavily-used docks, or are they more evenly-distributed?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{q\PYZus{}commute\PYZus{}morn} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  subs.start\PYZus{}station\PYZus{}name as station,}
+         \PY{l+s+s2}{  subs.subcount,}
+         \PY{l+s+s2}{  custs.custcount,}
+         \PY{l+s+s2}{  subs.subcount+custs.custcount as total\PYZus{}rides,}
+         \PY{l+s+s2}{  subs.subcount/(subs.subcount+custs.custcount) as subratio}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  (SELECT}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    COUNT(subscriber\PYZus{}type) as subcount}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{  WHERE}
+         \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{06:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{09:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{    AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Subscriber}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  GROUP BY}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name) as subs,}
+         \PY{l+s+s2}{  (SELECT}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    COUNT(subscriber\PYZus{}type) as custcount}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{  WHERE}
+         \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{06:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{09:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{    AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Customer}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  GROUP BY }
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name) as custs}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  subs.start\PYZus{}station\PYZus{}name = custs.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{ORDER BY}
+         \PY{l+s+s2}{  total\PYZus{}rides DESC}
+         \PY{l+s+s2}{LIMIT 20}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{q\PYZus{}commute\PYZus{}eve} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  subs.start\PYZus{}station\PYZus{}name as station,}
+         \PY{l+s+s2}{  subs.subcount,}
+         \PY{l+s+s2}{  custs.custcount,}
+         \PY{l+s+s2}{  subs.subcount+custs.custcount as total\PYZus{}rides,}
+         \PY{l+s+s2}{  subs.subcount/(subs.subcount+custs.custcount) as subratio}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  (SELECT}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    COUNT(subscriber\PYZus{}type) as subcount}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{  WHERE}
+         \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{19:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{    AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Subscriber}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  GROUP BY}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name) as subs,}
+         \PY{l+s+s2}{  (SELECT}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    COUNT(subscriber\PYZus{}type) as custcount}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{  WHERE}
+         \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{19:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{    AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Customer}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  GROUP BY }
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name) as custs}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  subs.start\PYZus{}station\PYZus{}name = custs.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{ORDER BY}
+         \PY{l+s+s2}{  total\PYZus{}rides DESC}
+         \PY{l+s+s2}{LIMIT 20}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}commute\PYZus{}morn}\PY{l+s+s2}{\PYZdq{}} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}commute\PYZus{}eve}\PY{l+s+s2}{\PYZdq{}} 
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} commute\PYZus{}morn.csv
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}2}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} commute\PYZus{}eve.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r1005fc03cdc492c3\_000001640b1ffb97\_1 {\ldots} (2s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{comm\PYZus{}stations\PYZus{}morn} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{commute\PYZus{}morn.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{comm\PYZus{}stations\PYZus{}morn}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}                                          station  subcount  custcount  \textbackslash{}
+         0       San Francisco Caltrain (Townsend at 4th)     33017        715   
+         1        San Francisco Caltrain 2 (330 Townsend)     21629        405   
+         2           Harry Bridges Plaza (Ferry Building)     16708        543   
+         3  Temporary Transbay Terminal (Howard at Beale)     15952        169   
+         4                              Steuart at Market     10175        279   
+         5                Grant Avenue at Columbus Avenue      8435        186   
+         6                                2nd at Townsend      7090        148   
+         7                          Embarcadero at Bryant      5849        101   
+         8                                 Market at 10th      5671        174   
+         9                                Townsend at 7th      5467         77   
+         
+            total\_rides  subratio  
+         0        33732  0.978804  
+         1        22034  0.981619  
+         2        17251  0.968524  
+         3        16121  0.989517  
+         4        10454  0.973312  
+         5         8621  0.978425  
+         6         7238  0.979552  
+         7         5950  0.983025  
+         8         5845  0.970231  
+         9         5544  0.986111  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar} \PY{o}{=} \PY{n}{comm\PYZus{}stations\PYZus{}morn}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total\PYZus{}rides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}1f77b4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most Popular Departure Stations for Morning Commute}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xx\PYZhy{}large}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{comm\PYZus{}stations\PYZus{}morn}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{station}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{comm\PYZus{}stations\PYZus{}eve} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{commute\PYZus{}eve.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{comm\PYZus{}stations\PYZus{}eve}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:}                                          station  subcount  custcount  \textbackslash{}
+         0                                Townsend at 7th     13535        535   
+         1       San Francisco Caltrain (Townsend at 4th)     12863        717   
+         2                                2nd at Townsend     12763        644   
+         3                         Embarcadero at Sansome      9937       2376   
+         4                              Market at Sansome     10476        625   
+         5                              2nd at South Park     10171        403   
+         6                              Steuart at Market      9681        713   
+         7        San Francisco Caltrain 2 (330 Townsend)      9491        354   
+         8  Temporary Transbay Terminal (Howard at Beale)      9604        220   
+         9                                 Market at 10th      9096        504   
+         
+            total\_rides  subratio  
+         0        14070  0.961976  
+         1        13580  0.947202  
+         2        13407  0.951965  
+         3        12313  0.807033  
+         4        11101  0.943699  
+         5        10574  0.961888  
+         6        10394  0.931403  
+         7         9845  0.964043  
+         8         9824  0.977606  
+         9         9600  0.947500  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar} \PY{o}{=} \PY{n}{comm\PYZus{}stations\PYZus{}eve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total\PYZus{}rides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}1f77b4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most Popular Departure Stations for Evening Commute}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xx\PYZhy{}large}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{comm\PYZus{}stations\PYZus{}eve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{station}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Answer:} We can clearly see that in the morning, the bulk of
+rides originate from 4 or 5 stations, all of which are debarkation
+points for trains or ferries. In the evening, however, the distribution
+is considerably more even. If we view the station activity as a heatmap,
+we can see the departure hotspots, as well as an appreciation that there
+is more activity in the morning than in the evening.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{q\PYZus{}stationlocs} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{SELECT latitude, longitude FROM `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations`}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{n}{q\PYZus{}stations\PYZus{}morn} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  stations.latitude,}
+         \PY{l+s+s2}{  stations.longitude,}
+         \PY{l+s+s2}{  COUNT(*) AS weight}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips` AS trips}
+         \PY{l+s+s2}{LEFT JOIN}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS stations}
+         \PY{l+s+s2}{ON}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id = stations.station\PYZus{}id}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  TIME(trips.start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{06:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{09:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{GROUP BY}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  stations.latitude,}
+         \PY{l+s+s2}{  stations.longitude}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{q\PYZus{}stations\PYZus{}eve} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  stations.latitude,}
+         \PY{l+s+s2}{  stations.longitude,}
+         \PY{l+s+s2}{  COUNT(*) AS weight}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips` AS trips}
+         \PY{l+s+s2}{LEFT JOIN}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS stations}
+         \PY{l+s+s2}{ON}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id = stations.station\PYZus{}id}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  TIME(trips.start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{19:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{GROUP BY}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  stations.latitude,}
+         \PY{l+s+s2}{  stations.longitude}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}stationlocs}\PY{l+s+s2}{\PYZdq{}} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}stations\PYZus{}morn}\PY{l+s+s2}{\PYZdq{}} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}stations\PYZus{}eve}\PY{l+s+s2}{\PYZdq{}}
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} all\PYZus{}stations.csv
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}2}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} commute\PYZus{}stations\PYZus{}morn.csv
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}3}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} commute\PYZus{}stations\PYZus{}eve.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r6370fc496f9c2dc0\_00000164073e4fd4\_1 {\ldots} (2s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{stations} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all\PYZus{}stations.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{csm} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{commute\PYZus{}stations\PYZus{}morn.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{cse} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{commute\PYZus{}stations\PYZus{}eve.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{center}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{37.785908}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{122.39547}\PY{p}{)}\PY{p}{,} \PY{n}{zoom\PYZus{}level}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{commute\PYZus{}heat\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{heatmap\PYZus{}layer}\PY{p}{(}\PY{n}{csm}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{n}{csm}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{all\PYZus{}stations\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{symbol\PYZus{}layer}\PY{p}{(}\PY{n}{stations}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{commute\PYZus{}heat\PYZus{}layer}\PY{o}{.}\PY{n}{max\PYZus{}intensity} \PY{o}{=} \PY{l+m+mi}{5000}
+        \PY{n}{commute\PYZus{}heat\PYZus{}layer}\PY{o}{.}\PY{n}{point\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{25}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{commute\PYZus{}heat\PYZus{}layer}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{all\PYZus{}stations\PYZus{}layer}\PY{p}{)}
+        \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='420px'))
+    \end{verbatim}
+
+    
+    \begin{figure}[htbp]
+\centering
+\includegraphics{imgs/commute_stations_morn.png}
+\caption{}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{center}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{37.785908}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{122.39547}\PY{p}{)}\PY{p}{,} \PY{n}{zoom\PYZus{}level}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{commute\PYZus{}heat\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{heatmap\PYZus{}layer}\PY{p}{(}\PY{n}{cse}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{n}{csm}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{all\PYZus{}stations\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{symbol\PYZus{}layer}\PY{p}{(}\PY{n}{stations}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{commute\PYZus{}heat\PYZus{}layer}\PY{o}{.}\PY{n}{max\PYZus{}intensity} \PY{o}{=} \PY{l+m+mi}{5000}
+        \PY{n}{commute\PYZus{}heat\PYZus{}layer}\PY{o}{.}\PY{n}{point\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{25}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{commute\PYZus{}heat\PYZus{}layer}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{all\PYZus{}stations\PYZus{}layer}\PY{p}{)}
+        \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='420px'))
+    \end{verbatim}
+
+    
+    \begin{figure}[htbp]
+\centering
+\includegraphics{imgs/commute_stations_eve.png}
+\caption{}
+\end{figure}
+
+    To consider the bikes as advertising platforms, however, we need to know
+where they are when they \emph{aren't} in a dock. For that, we should
+look at \emph{routes}, rather than departure points. \textbf{What are
+the 20 most popular commute routes?} Defined here as a matched pair of
+stations used both morning and afternoon.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{q\PYZus{}commute\PYZus{}routes} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  morning.start\PYZus{}station\PYZus{}id AS morn\PYZus{}start,}
+         \PY{l+s+s2}{  morning.end\PYZus{}station\PYZus{}id AS morn\PYZus{}end,}
+         \PY{l+s+s2}{  evening.start\PYZus{}station\PYZus{}id AS eve\PYZus{}start,}
+         \PY{l+s+s2}{  evening.end\PYZus{}station\PYZus{}id AS eve\PYZus{}end,}
+         \PY{l+s+s2}{  CONCAT(morning.start\PYZus{}station\PYZus{}name, }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ / }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, morning.end\PYZus{}station\PYZus{}name)  AS route,}
+         \PY{l+s+s2}{  mornstations.longitude AS morning\PYZus{}long,}
+         \PY{l+s+s2}{  mornstations.latitude AS morning\PYZus{}lat,}
+         \PY{l+s+s2}{  evestations.longitude AS evening\PYZus{}long,}
+         \PY{l+s+s2}{  evestations.latitude AS evening\PYZus{}lat,  }
+         \PY{l+s+s2}{  morning.trips}
+         \PY{l+s+s2}{FROM (}
+         \PY{l+s+s2}{  SELECT}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{    end\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    end\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    COUNT(*) as trips}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{  WHERE}
+         \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{07:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{09:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{  GROUP BY}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{    end\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{    end\PYZus{}station\PYZus{}name) AS morning,}
+         \PY{l+s+s2}{  (}
+         \PY{l+s+s2}{  SELECT}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{    end\PYZus{}station\PYZus{}id}
+         \PY{l+s+s2}{  FROM}
+         \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{  WHERE}
+         \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{18:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{    AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{  GROUP BY}
+         \PY{l+s+s2}{    start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{    end\PYZus{}station\PYZus{}id) AS evening}
+         \PY{l+s+s2}{LEFT JOIN}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS mornstations}
+         \PY{l+s+s2}{ON}
+         \PY{l+s+s2}{  morning.start\PYZus{}station\PYZus{}id = mornstations.station\PYZus{}id}
+         \PY{l+s+s2}{LEFT JOIN}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS evestations}
+         \PY{l+s+s2}{ON}
+         \PY{l+s+s2}{  evening.start\PYZus{}station\PYZus{}id = evestations.station\PYZus{}id}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  morning.start\PYZus{}station\PYZus{}id = evening.end\PYZus{}station\PYZus{}id}
+         \PY{l+s+s2}{  AND morning.end\PYZus{}station\PYZus{}id = evening.start\PYZus{}station\PYZus{}id}
+         \PY{l+s+s2}{ORDER BY }
+         \PY{l+s+s2}{  morning.trips DESC}
+         \PY{l+s+s2}{LIMIT 20}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}commute\PYZus{}routes}\PY{l+s+s2}{\PYZdq{}}
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} commute\PYZus{}routes.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r752c642ea6f52b69\_000001640b484dd6\_1 {\ldots} (2s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{routes} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{commute\PYZus{}routes.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar} \PY{o}{=} \PY{n}{routes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}1f77b4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most Popular Commute Routes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{n}{routes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{route}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{figure\PYZus{}layout} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1000px}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{600px}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{center}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{37.786978}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{122.39547}\PY{p}{)}\PY{p}{,} \PY{n}{zoom\PYZus{}level}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{figure\PYZus{}layout}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{routes}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{start} \PY{o}{=} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{morning\PYZus{}lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{morning\PYZus{}long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{end} \PY{o}{=} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{evening\PYZus{}lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{evening\PYZus{}long}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{route} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{directions\PYZus{}layer}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{end}\PY{p}{,} \PY{n}{show\PYZus{}markers}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{stroke\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{all\PYZus{}stations\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{symbol\PYZus{}layer}\PY{p}{(}\PY{n}{stations}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{route}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{all\PYZus{}stations\PYZus{}layer}\PY{p}{)}
+         \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='600px', width='1000px'))
+    \end{verbatim}
+
+    
+    \begin{figure}[htbp]
+\centering
+\includegraphics{imgs/commute_routes.PNG?raw=true}
+\caption{}
+\end{figure}
+
+    We see that by far the most common route is from Montgomery BART down
+2nd to South Park. The other routes follow a similar pattern - from
+transit hubs to outlying business areas which are otherwise
+inaccessible. Most if not all of these routes are in heavy traffic
+corridors both for cars and pedestrians, so a promotional display on
+bikes along these routes that was tailored to commuters who are
+otherwise sitting in traffic or hoofing it to work could be effective.
+However, there is no guarantee that a bike placed at one of these docks
+at the start of the day would STAY in commuter territory-\/-it could
+easily wander off with other riders. Which begs the question:
+\textbf{For bikes that start the day in commuter docks, what percentage
+of rides for the rest of that day are between two commuter stations?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{q\PYZus{}commute\PYZus{}terr} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{  SELECT}
+         \PY{l+s+s2}{    Matching\PYZus{}table.bike\PYZus{}number AS Bike\PYZus{}num,}
+         \PY{l+s+s2}{    DATE(Matching\PYZus{}table.start\PYZus{}date) AS Ride\PYZus{}date,}
+         \PY{l+s+s2}{    COUNT(Matching\PYZus{}table.Startmatch) AS Matches,}
+         \PY{l+s+s2}{    Matching\PYZus{}table.Totalrides,}
+         \PY{l+s+s2}{    COUNT(Matching\PYZus{}table.Startmatch)/Matching\PYZus{}table.Totalrides AS Ratio}
+         \PY{l+s+s2}{  FROM (}
+         \PY{l+s+s2}{    SELECT}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.*,}
+         \PY{l+s+s2}{      commuter\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name AS ref\PYZus{}start,}
+         \PY{l+s+s2}{      commuter\PYZus{}stations\PYZus{}2.start\PYZus{}station\PYZus{}name AS ref\PYZus{}end,}
+         \PY{l+s+s2}{      (CASE}
+         \PY{l+s+s2}{          WHEN (commuter\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name IS NOT NULL}
+         \PY{l+s+s2}{          AND commuter\PYZus{}stations\PYZus{}2.start\PYZus{}station\PYZus{}name IS NOT NULL) THEN COUNT(commuter\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name) OVER (PARTITION BY DATE(start\PYZus{}date),}
+         \PY{l+s+s2}{          bike\PYZus{}number) END) AS Startmatch,}
+         \PY{l+s+s2}{      COUNT(trip\PYZus{}id) OVER (PARTITION BY DATE(start\PYZus{}date),}
+         \PY{l+s+s2}{        bike\PYZus{}number) AS Totalrides}
+         \PY{l+s+s2}{    FROM (}
+         \PY{l+s+s2}{      SELECT}
+         \PY{l+s+s2}{        DISTINCT(all\PYZus{}trips.trip\PYZus{}id),}
+         \PY{l+s+s2}{        all\PYZus{}trips.bike\PYZus{}number,}
+         \PY{l+s+s2}{        all\PYZus{}trips.start\PYZus{}date,}
+         \PY{l+s+s2}{        all\PYZus{}trips.start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{        all\PYZus{}trips.end\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{      FROM}
+         \PY{l+s+s2}{        `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips` AS all\PYZus{}trips,}
+         \PY{l+s+s2}{        (}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{          DISTINCT(bike\PYZus{}number),}
+         \PY{l+s+s2}{          start\PYZus{}date}
+         \PY{l+s+s2}{        FROM (}
+         \PY{l+s+s2}{          SELECT}
+         \PY{l+s+s2}{            start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{            COUNT(*) AS trips}
+         \PY{l+s+s2}{          FROM}
+         \PY{l+s+s2}{            `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{          WHERE}
+         \PY{l+s+s2}{            (TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{07:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{10:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ OR TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{19:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)}
+         \PY{l+s+s2}{            AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{            AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{          GROUP BY}
+         \PY{l+s+s2}{            start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{          ORDER BY}
+         \PY{l+s+s2}{            trips DESC}
+         \PY{l+s+s2}{          LIMIT}
+         \PY{l+s+s2}{            20) AS commuter\PYZus{}stations,}
+         \PY{l+s+s2}{          (}
+         \PY{l+s+s2}{          SELECT}
+         \PY{l+s+s2}{            bike\PYZus{}number,}
+         \PY{l+s+s2}{            start\PYZus{}date,}
+         \PY{l+s+s2}{            start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{          FROM}
+         \PY{l+s+s2}{            `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`) AS all\PYZus{}bikes}
+         \PY{l+s+s2}{        WHERE}
+         \PY{l+s+s2}{          TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{07:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{08:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{          AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{          AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{          AND commuter\PYZus{}stations.start\PYZus{}station\PYZus{}name = all\PYZus{}bikes.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{        ORDER BY}
+         \PY{l+s+s2}{          start\PYZus{}date ASC) AS start\PYZus{}bikes}
+         \PY{l+s+s2}{      WHERE}
+         \PY{l+s+s2}{        all\PYZus{}trips.bike\PYZus{}number = start\PYZus{}bikes.bike\PYZus{}number}
+         \PY{l+s+s2}{          AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(all\PYZus{}trips.start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{          AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(all\PYZus{}trips.start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{          AND DATE(start\PYZus{}bikes.start\PYZus{}date) = DATE(all\PYZus{}trips.start\PYZus{}date)}
+         \PY{l+s+s2}{      ORDER BY}
+         \PY{l+s+s2}{        all\PYZus{}trips.start\PYZus{}date,}
+         \PY{l+s+s2}{        all\PYZus{}trips.bike\PYZus{}number) AS bike\PYZus{}journeys}
+         \PY{l+s+s2}{    LEFT JOIN (}
+         \PY{l+s+s2}{      SELECT}
+         \PY{l+s+s2}{        start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{        COUNT(*) AS trips}
+         \PY{l+s+s2}{      FROM}
+         \PY{l+s+s2}{        `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{      WHERE}
+         \PY{l+s+s2}{        (TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{07:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{10:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ OR TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{19:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)}
+         \PY{l+s+s2}{        AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{        AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{      GROUP BY}
+         \PY{l+s+s2}{        start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{      ORDER BY}
+         \PY{l+s+s2}{        trips DESC}
+         \PY{l+s+s2}{      LIMIT}
+         \PY{l+s+s2}{        20) AS commuter\PYZus{}stations\PYZus{}1}
+         \PY{l+s+s2}{    ON}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.start\PYZus{}station\PYZus{}name = commuter\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{    LEFT JOIN (}
+         \PY{l+s+s2}{      SELECT}
+         \PY{l+s+s2}{        start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{        COUNT(*) AS trips}
+         \PY{l+s+s2}{      FROM}
+         \PY{l+s+s2}{        `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{      WHERE}
+         \PY{l+s+s2}{        (TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{07:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{10:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ OR TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{19:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{)}
+         \PY{l+s+s2}{        AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZgt{} 0}
+         \PY{l+s+s2}{        AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) \PYZlt{} 6}
+         \PY{l+s+s2}{      GROUP BY}
+         \PY{l+s+s2}{        start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{      ORDER BY}
+         \PY{l+s+s2}{        trips DESC}
+         \PY{l+s+s2}{      LIMIT}
+         \PY{l+s+s2}{        20) AS commuter\PYZus{}stations\PYZus{}2}
+         \PY{l+s+s2}{    ON}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.end\PYZus{}station\PYZus{}name = commuter\PYZus{}stations\PYZus{}2.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{    ORDER BY}
+         \PY{l+s+s2}{      DATE(bike\PYZus{}journeys.start\PYZus{}date),}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.bike\PYZus{}number ) AS Matching\PYZus{}table}
+         \PY{l+s+s2}{  GROUP BY}
+         \PY{l+s+s2}{    DATE(Matching\PYZus{}table.start\PYZus{}date),}
+         \PY{l+s+s2}{    Matching\PYZus{}table.bike\PYZus{}number,}
+         \PY{l+s+s2}{    Matching\PYZus{}table.Totalrides}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}commute\PYZus{}terr}\PY{l+s+s2}{\PYZdq{}}
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PYZhy{}\PYZhy{}max\PYZus{}rows\PY{o}{=}\PY{l+m}{45000} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} commute\PYZus{}territory.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r348c7b6b21ab089d\_00000164099c4179\_1 {\ldots} (15s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{commute\PYZus{}territory} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{commute\PYZus{}territory.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{hist} \PY{o}{=} \PY{n}{commute\PYZus{}territory}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of Bike Days by Percentage of rides in Commuter Territory}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} Text(0.5,0.98,'Distribution of Bike Days by Percentage of rides in Commuter Territory')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{commute\PYZus{}territory\PYZus{}avg} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{commute\PYZus{}territory}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{commute\PYZus{}territory}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Totalrides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{For bikes that begin the day at a commuter dock, }\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f their subsequent routes are between commuter docks.}\PY{l+s+s2}{\PYZdq{}}
+               \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{commute\PYZus{}territory\PYZus{}avg}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         \PY{n}{commute\PYZus{}legs\PYZus{}day} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{commute\PYZus{}territory}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{785} \PY{c+c1}{\PYZsh{} There are 785 weekdays in the database}
+         \PY{n}{commute\PYZus{}legs\PYZus{}day\PYZus{}bike} \PY{o}{=} \PY{n}{commute\PYZus{}legs\PYZus{}day}\PY{o}{/}\PY{l+m+mi}{54} \PY{c+c1}{\PYZsh{} Average number of unique bikes in service during commute hours on weekdays}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{On average, there are }\PY{l+s+si}{\PYZob{}:.0f\PYZcb{}}\PY{l+s+s2}{ commute legs completed per weekday.  That works out to about }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{ routes per bike per day.}\PY{l+s+s2}{\PYZdq{}}
+              \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{commute\PYZus{}legs\PYZus{}day}\PY{p}{,} \PY{n}{commute\PYZus{}legs\PYZus{}day\PYZus{}bike}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For bikes that begin the day at a commuter dock, 62.1\% of their subsequent routes are between commuter docks.
+On average, there are 158 commute legs completed per weekday.  That works out to about 2.93 routes per bike per day.
+
+    \end{Verbatim}
+
+    \subsubsection{Commuter Analysis and
+Recommendation}\label{commuter-analysis-and-recommendation}
+
+For a bike that starts the day at 7am in a commuter dock, 3 out of 5
+rides that day will be between commuter waypoints, making it a fairly
+effective vehicle (as it were) for a promotion. However, not many bikes
+will make it to 5 rides - the average bike only makes about 4 trips per
+day, and \textasciitilde{}2.5 of those are between commuter stops.
+
+A promotion aimed at getting commuters to sign up for membership could
+be displayed on the side of bikes at the most popular commuter docks.
+Something along the lines of "If you lived here, you'd be home by now"
+but for inspiring envy of those getting to work/home faster.
+
+    \subsection{Tourists}\label{tourists}
+
+Tourist analysis is similar to the commuters, only with one much broader
+window of popularity rather than two distinct periods. The first
+question is: **What are the most popular docks on the weekend, and how
+many of them are subscribers?*
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{q\PYZus{}tourist} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+s2}{SELECT}
+          \PY{l+s+s2}{  subs.start\PYZus{}station\PYZus{}name as station,}
+          \PY{l+s+s2}{  subs.subcount,}
+          \PY{l+s+s2}{  custs.custcount,}
+          \PY{l+s+s2}{  subs.subcount+custs.custcount as total\PYZus{}rides,}
+          \PY{l+s+s2}{  subs.subcount/(subs.subcount+custs.custcount) as subratio}
+          \PY{l+s+s2}{FROM}
+          \PY{l+s+s2}{  (SELECT}
+          \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+          \PY{l+s+s2}{    COUNT(subscriber\PYZus{}type) as subcount}
+          \PY{l+s+s2}{  FROM}
+          \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+          \PY{l+s+s2}{  WHERE}
+          \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+          \PY{l+s+s2}{    AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+          \PY{l+s+s2}{    OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+          \PY{l+s+s2}{    AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Subscriber}\PY{l+s+s2}{\PYZsq{}}
+          \PY{l+s+s2}{  GROUP BY}
+          \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name) as subs,}
+          \PY{l+s+s2}{  (SELECT}
+          \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name,}
+          \PY{l+s+s2}{    COUNT(subscriber\PYZus{}type) as custcount}
+          \PY{l+s+s2}{  FROM}
+          \PY{l+s+s2}{    `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+          \PY{l+s+s2}{  WHERE}
+          \PY{l+s+s2}{    TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+          \PY{l+s+s2}{    AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+          \PY{l+s+s2}{    OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+          \PY{l+s+s2}{    AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Customer}\PY{l+s+s2}{\PYZsq{}}
+          \PY{l+s+s2}{  GROUP BY }
+          \PY{l+s+s2}{    start\PYZus{}station\PYZus{}name) as custs}
+          \PY{l+s+s2}{WHERE}
+          \PY{l+s+s2}{  subs.start\PYZus{}station\PYZus{}name = custs.start\PYZus{}station\PYZus{}name}
+          \PY{l+s+s2}{  AND subs.subcount+custs.custcount \PYZgt{} 1000}
+          \PY{l+s+s2}{ORDER BY}
+          \PY{l+s+s2}{  total\PYZus{}rides DESC}
+          \PY{l+s+s2}{LIMIT 10}
+          \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}tourist}\PY{l+s+s2}{\PYZdq{}}
+          ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} tourist\PYZus{}docks.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r3df3794c94c50344\_000001640c44758e\_1 {\ldots} (1s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n}{tour\PYZus{}stations} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tourist\PYZus{}docks.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{tour\PYZus{}stations}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}117}]:}                                     station  subcount  custcount  total\_rides  \textbackslash{}
+          0      Harry Bridges Plaza (Ferry Building)       996       2826         3822   
+          1                    Embarcadero at Sansome       963       2504         3467   
+          2                           2nd at Townsend       827        833         1660   
+          3                     Embarcadero at Bryant       783        797         1580   
+          4                             Market at 4th       703        864         1567   
+          5                        Powell Street BART       622        821         1443   
+          6                         Steuart at Market       493        896         1389   
+          7  San Francisco Caltrain (Townsend at 4th)       681        654         1335   
+          8           Grant Avenue at Columbus Avenue       718        600         1318   
+          9                    Embarcadero at Vallejo       172        976         1148   
+          
+             subratio  
+          0  0.260597  
+          1  0.277762  
+          2  0.498193  
+          3  0.495570  
+          4  0.448628  
+          5  0.431046  
+          6  0.354932  
+          7  0.510112  
+          8  0.544765  
+          9  0.149826  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+          \PY{n}{bar} \PY{o}{=} \PY{n}{tour\PYZus{}stations}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total\PYZus{}rides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}1f77b4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most Popular Departure Stations for Weekend Rush}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{xx\PYZhy{}large}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{tour\PYZus{}stations}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{station}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that just two stations are by far the most popular, and that
+these trips have a very low percentage of subscribers - only about 27\%.
+Let's look at the heatmap of activity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{q\PYZus{}stations} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+s2}{SELECT}
+          \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+          \PY{l+s+s2}{  stations.latitude,}
+          \PY{l+s+s2}{  stations.longitude,}
+          \PY{l+s+s2}{  COUNT(*) AS weight}
+          \PY{l+s+s2}{FROM}
+          \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips` AS trips}
+          \PY{l+s+s2}{LEFT JOIN}
+          \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS stations}
+          \PY{l+s+s2}{ON}
+          \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id = stations.station\PYZus{}id}
+          \PY{l+s+s2}{WHERE}
+          \PY{l+s+s2}{  TIME(trips.start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+          \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) = 0}
+          \PY{l+s+s2}{  OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) = 6}
+          \PY{l+s+s2}{GROUP BY}
+          \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+          \PY{l+s+s2}{  stations.latitude,}
+          \PY{l+s+s2}{  stations.longitude}
+          \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}stations}\PY{l+s+s2}{\PYZdq{}}
+          ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} tourist\PYZus{}stations.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r153f90b17966e9ee\_000001640c4cf360\_1 {\ldots} (3s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{weekend\PYZus{}stations} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tourist\PYZus{}stations.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{center}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{37.785908}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{122.39547}\PY{p}{)}\PY{p}{,} \PY{n}{zoom\PYZus{}level}\PY{o}{=}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{tourist\PYZus{}heat\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{heatmap\PYZus{}layer}\PY{p}{(}\PY{n}{weekend\PYZus{}stations}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{n}{weekend\PYZus{}stations}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weight}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{all\PYZus{}stations\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{symbol\PYZus{}layer}\PY{p}{(}\PY{n}{stations}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{tourist\PYZus{}heat\PYZus{}layer}\PY{o}{.}\PY{n}{max\PYZus{}intensity} \PY{o}{=} \PY{l+m+mi}{5000}
+        \PY{n}{tourist\PYZus{}heat\PYZus{}layer}\PY{o}{.}\PY{n}{point\PYZus{}radius} \PY{o}{=} \PY{l+m+mi}{25}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{tourist\PYZus{}heat\PYZus{}layer}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{all\PYZus{}stations\PYZus{}layer}\PY{p}{)}
+        \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='420px'))
+    \end{verbatim}
+
+    
+    \begin{figure}[htbp]
+\centering
+\includegraphics{imgs/weekend_stations.png?raw=true}
+\caption{}
+\end{figure}
+
+    The two most popular stations (Embarcadero at Sansome and the Ferry
+Building) are clearly dilineated, but all the other stations look like
+they're getting similar levels of traffic. What if we consider routes
+instead of stations?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{q\PYZus{}tourist\PYZus{}routes} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{SELECT}
+         \PY{l+s+s2}{  CONCAT(trips.start\PYZus{}station\PYZus{}name, }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ / }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, trips.end\PYZus{}station\PYZus{}name) as route,}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  trips.end\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  start\PYZus{}stations.latitude as start\PYZus{}lat,}
+         \PY{l+s+s2}{  start\PYZus{}stations.longitude as start\PYZus{}lon,}
+         \PY{l+s+s2}{  end\PYZus{}stations.latitude as end\PYZus{}lat,}
+         \PY{l+s+s2}{  end\PYZus{}stations.longitude as end\PYZus{}lon,}
+         \PY{l+s+s2}{  COUNT(*) AS num\PYZus{}trips}
+         \PY{l+s+s2}{FROM}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips` AS trips}
+         \PY{l+s+s2}{LEFT JOIN}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS start\PYZus{}stations}
+         \PY{l+s+s2}{ON}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id = start\PYZus{}stations.station\PYZus{}id}
+         \PY{l+s+s2}{LEFT JOIN}
+         \PY{l+s+s2}{  `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}stations` AS end\PYZus{}stations}
+         \PY{l+s+s2}{ON}
+         \PY{l+s+s2}{  trips.end\PYZus{}station\PYZus{}id = end\PYZus{}stations.station\PYZus{}id}
+         \PY{l+s+s2}{WHERE}
+         \PY{l+s+s2}{  TIME(trips.start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{  AND CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{  OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(trips.start\PYZus{}date)) AS int64) = 6}
+         \PY{l+s+s2}{GROUP BY}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{  trips.end\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{  trips.start\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  trips.end\PYZus{}station\PYZus{}id,}
+         \PY{l+s+s2}{  start\PYZus{}stations.latitude,}
+         \PY{l+s+s2}{  start\PYZus{}stations.longitude,}
+         \PY{l+s+s2}{  end\PYZus{}stations.latitude,}
+         \PY{l+s+s2}{  end\PYZus{}stations.longitude}
+         \PY{l+s+s2}{ORDER BY}
+         \PY{l+s+s2}{  COUNT(*) DESC}
+         \PY{l+s+s2}{LIMIT}
+         \PY{l+s+s2}{  10}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}tourist\PYZus{}routes}\PY{l+s+s2}{\PYZdq{}}
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} tourist\PYZus{}routes.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r6d76aca21f104e38\_00000164107185e8\_1 {\ldots} (3s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{tourist\PYZus{}routes} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tourist\PYZus{}routes.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar} \PY{o}{=} \PY{n}{tourist\PYZus{}routes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}trips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}1f77b4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{width}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Most Popular Tourist Routes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}yticklabels}\PY{p}{(}\PY{n}{tourist\PYZus{}routes}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{route}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{figure\PYZus{}layout} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{width}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1000px}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{600px}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{center}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{37.786978}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{122.39547}\PY{p}{)}\PY{p}{,} \PY{n}{zoom\PYZus{}level}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{figure\PYZus{}layout}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n}{tourist\PYZus{}routes}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{start} \PY{o}{=} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{start\PYZus{}lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{end} \PY{o}{=} \PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{end\PYZus{}lon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{route} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{directions\PYZus{}layer}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{end}\PY{p}{,} \PY{n}{show\PYZus{}markers}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{stroke\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{all\PYZus{}stations\PYZus{}layer} \PY{o}{=} \PY{n}{gmaps}\PY{o}{.}\PY{n}{symbol\PYZus{}layer}\PY{p}{(}\PY{n}{stations}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{fill\PYZus{}color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{route}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}layer}\PY{p}{(}\PY{n}{all\PYZus{}stations\PYZus{}layer}\PY{p}{)}
+         \PY{n}{fig}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Figure(layout=FigureLayout(height='600px', width='1000px'))
+    \end{verbatim}
+
+    
+    \begin{figure}[htbp]
+\centering
+\includegraphics{imgs/tourist_routes.PNG?raw=true}
+\caption{}
+\end{figure}
+
+    The four most popular routes are either between the Ferry Building and
+Embarcadero at Sansome, or begin and end at one of those. Every other
+popular route includes one of these two stations, except the last one
+(University and Emerson). Looking at the route map, it's very clear what
+riders want to do on the weekend: ride between AT\&T Park and Pier 39.
+If GoBike were looking to expand its docks, along the northern short to
+Crissy Field and the Golden Gate would seem like the most natural
+extension.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{q\PYZus{}tourist\PYZus{}terr} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{  SELECT}
+         \PY{l+s+s2}{    Matching\PYZus{}table.bike\PYZus{}number AS Bike\PYZus{}num,}
+         \PY{l+s+s2}{    DATE(Matching\PYZus{}table.start\PYZus{}date) AS Ride\PYZus{}date,}
+         \PY{l+s+s2}{    COUNT(Matching\PYZus{}table.Startmatch) AS Matches,}
+         \PY{l+s+s2}{    Matching\PYZus{}table.Totalrides,}
+         \PY{l+s+s2}{    COUNT(Matching\PYZus{}table.Startmatch)/Matching\PYZus{}table.Totalrides AS Ratio}
+         \PY{l+s+s2}{  FROM (}
+         \PY{l+s+s2}{    SELECT}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.*,}
+         \PY{l+s+s2}{      tourist\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name AS ref\PYZus{}start,}
+         \PY{l+s+s2}{      tourist\PYZus{}stations\PYZus{}2.start\PYZus{}station\PYZus{}name AS ref\PYZus{}end,}
+         \PY{l+s+s2}{      (CASE}
+         \PY{l+s+s2}{          WHEN (tourist\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name IS NOT NULL}
+         \PY{l+s+s2}{          AND tourist\PYZus{}stations\PYZus{}2.start\PYZus{}station\PYZus{}name IS NOT NULL) THEN COUNT(tourist\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name) OVER (PARTITION BY DATE(start\PYZus{}date),}
+         \PY{l+s+s2}{          bike\PYZus{}number) END) AS Startmatch,}
+         \PY{l+s+s2}{      COUNT(trip\PYZus{}id) OVER (PARTITION BY DATE(start\PYZus{}date),}
+         \PY{l+s+s2}{        bike\PYZus{}number) AS Totalrides}
+         \PY{l+s+s2}{    FROM (}
+         \PY{l+s+s2}{      SELECT}
+         \PY{l+s+s2}{        DISTINCT(all\PYZus{}trips.trip\PYZus{}id),}
+         \PY{l+s+s2}{        all\PYZus{}trips.bike\PYZus{}number,}
+         \PY{l+s+s2}{        all\PYZus{}trips.start\PYZus{}date,}
+         \PY{l+s+s2}{        all\PYZus{}trips.start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{        all\PYZus{}trips.end\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{      FROM}
+         \PY{l+s+s2}{        `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips` AS all\PYZus{}trips,}
+         \PY{l+s+s2}{        (}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{          DISTINCT(bike\PYZus{}number),}
+         \PY{l+s+s2}{          start\PYZus{}date}
+         \PY{l+s+s2}{        FROM (}
+         \PY{l+s+s2}{          SELECT}
+         \PY{l+s+s2}{            subs.start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{            subs.subcount,}
+         \PY{l+s+s2}{            custs.custcount,}
+         \PY{l+s+s2}{            subs.subcount+custs.custcount AS total\PYZus{}rides,}
+         \PY{l+s+s2}{            subs.subcount/(subs.subcount+custs.custcount) AS subratio}
+         \PY{l+s+s2}{          FROM (}
+         \PY{l+s+s2}{            SELECT}
+         \PY{l+s+s2}{              start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{              COUNT(subscriber\PYZus{}type) AS subcount}
+         \PY{l+s+s2}{            FROM}
+         \PY{l+s+s2}{              `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{            WHERE}
+         \PY{l+s+s2}{              TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{              AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{                OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{              AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Subscriber}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{            GROUP BY}
+         \PY{l+s+s2}{              start\PYZus{}station\PYZus{}name) AS subs,}
+         \PY{l+s+s2}{            (}
+         \PY{l+s+s2}{            SELECT}
+         \PY{l+s+s2}{              start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{              COUNT(subscriber\PYZus{}type) AS custcount}
+         \PY{l+s+s2}{            FROM}
+         \PY{l+s+s2}{              `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{            WHERE}
+         \PY{l+s+s2}{              TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{              AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{                OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{              AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Customer}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{            GROUP BY}
+         \PY{l+s+s2}{              start\PYZus{}station\PYZus{}name) AS custs}
+         \PY{l+s+s2}{          WHERE}
+         \PY{l+s+s2}{            subs.start\PYZus{}station\PYZus{}name = custs.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{            AND subs.subcount+custs.custcount \PYZgt{} 1000}
+         \PY{l+s+s2}{            AND subs.subcount/(subs.subcount+custs.custcount) \PYZlt{} .6 ) AS tourist\PYZus{}stations,}
+         \PY{l+s+s2}{          (}
+         \PY{l+s+s2}{          SELECT}
+         \PY{l+s+s2}{            bike\PYZus{}number,}
+         \PY{l+s+s2}{            start\PYZus{}date,}
+         \PY{l+s+s2}{            start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{          FROM}
+         \PY{l+s+s2}{            `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`) AS all\PYZus{}bikes}
+         \PY{l+s+s2}{        WHERE}
+         \PY{l+s+s2}{          TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{13:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{          AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{            OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{          AND tourist\PYZus{}stations.start\PYZus{}station\PYZus{}name = all\PYZus{}bikes.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{        ORDER BY}
+         \PY{l+s+s2}{          start\PYZus{}date ASC) AS start\PYZus{}bikes}
+         \PY{l+s+s2}{      WHERE}
+         \PY{l+s+s2}{        all\PYZus{}trips.bike\PYZus{}number = start\PYZus{}bikes.bike\PYZus{}number}
+         \PY{l+s+s2}{        AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(all\PYZus{}trips.start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{          OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(all\PYZus{}trips.start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{        AND TIME(all\PYZus{}trips.start\PYZus{}date) \PYZgt{} }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{        AND DATE(start\PYZus{}bikes.start\PYZus{}date) = DATE(all\PYZus{}trips.start\PYZus{}date)}
+         \PY{l+s+s2}{      ORDER BY}
+         \PY{l+s+s2}{        all\PYZus{}trips.start\PYZus{}date,}
+         \PY{l+s+s2}{        all\PYZus{}trips.bike\PYZus{}number) AS bike\PYZus{}journeys}
+         \PY{l+s+s2}{    LEFT JOIN (}
+         \PY{l+s+s2}{      SELECT}
+         \PY{l+s+s2}{        subs.start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{        subs.subcount,}
+         \PY{l+s+s2}{        custs.custcount,}
+         \PY{l+s+s2}{        subs.subcount+custs.custcount AS total\PYZus{}rides,}
+         \PY{l+s+s2}{        subs.subcount/(subs.subcount+custs.custcount) AS subratio}
+         \PY{l+s+s2}{      FROM (}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{          COUNT(subscriber\PYZus{}type) AS subcount}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{          `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{        WHERE}
+         \PY{l+s+s2}{          TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{          AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{            OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{          AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Subscriber}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{        GROUP BY}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name) AS subs,}
+         \PY{l+s+s2}{        (}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{          COUNT(subscriber\PYZus{}type) AS custcount}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{          `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{        WHERE}
+         \PY{l+s+s2}{          TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{          AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{            OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{          AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Customer}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{        GROUP BY}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name) AS custs}
+         \PY{l+s+s2}{      WHERE}
+         \PY{l+s+s2}{        subs.start\PYZus{}station\PYZus{}name = custs.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{        AND subs.subcount+custs.custcount \PYZgt{} 1000}
+         \PY{l+s+s2}{        AND subs.subcount/(subs.subcount+custs.custcount) \PYZlt{} .6 ) AS tourist\PYZus{}stations\PYZus{}1}
+         \PY{l+s+s2}{    ON}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.start\PYZus{}station\PYZus{}name = tourist\PYZus{}stations\PYZus{}1.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{    LEFT JOIN (}
+         \PY{l+s+s2}{      SELECT}
+         \PY{l+s+s2}{        subs.start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{        subs.subcount,}
+         \PY{l+s+s2}{        custs.custcount,}
+         \PY{l+s+s2}{        subs.subcount+custs.custcount AS total\PYZus{}rides,}
+         \PY{l+s+s2}{        subs.subcount/(subs.subcount+custs.custcount) AS subratio}
+         \PY{l+s+s2}{      FROM (}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{          COUNT(subscriber\PYZus{}type) AS subcount}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{          `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{        WHERE}
+         \PY{l+s+s2}{          TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{          AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{            OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{          AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Subscriber}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{        GROUP BY}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name) AS subs,}
+         \PY{l+s+s2}{        (}
+         \PY{l+s+s2}{        SELECT}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name,}
+         \PY{l+s+s2}{          COUNT(subscriber\PYZus{}type) AS custcount}
+         \PY{l+s+s2}{        FROM}
+         \PY{l+s+s2}{          `bigquery\PYZhy{}public\PYZhy{}data.san\PYZus{}francisco.bikeshare\PYZus{}trips`}
+         \PY{l+s+s2}{        WHERE}
+         \PY{l+s+s2}{          TIME(start\PYZus{}date) BETWEEN }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{12:00:00}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{AND }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{16:00:00}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{          AND (CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 0}
+         \PY{l+s+s2}{            OR CAST(FORMAT\PYZus{}DATE(}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{w}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{, DATE(start\PYZus{}date)) AS int64) = 6)}
+         \PY{l+s+s2}{          AND subscriber\PYZus{}type = }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{Customer}\PY{l+s+s2}{\PYZsq{}}
+         \PY{l+s+s2}{        GROUP BY}
+         \PY{l+s+s2}{          start\PYZus{}station\PYZus{}name) AS custs}
+         \PY{l+s+s2}{      WHERE}
+         \PY{l+s+s2}{        subs.start\PYZus{}station\PYZus{}name = custs.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{        AND subs.subcount+custs.custcount \PYZgt{} 1000}
+         \PY{l+s+s2}{        AND subs.subcount/(subs.subcount+custs.custcount) \PYZlt{} .6 ) AS tourist\PYZus{}stations\PYZus{}2}
+         \PY{l+s+s2}{    ON}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.end\PYZus{}station\PYZus{}name = tourist\PYZus{}stations\PYZus{}2.start\PYZus{}station\PYZus{}name}
+         \PY{l+s+s2}{    ORDER BY}
+         \PY{l+s+s2}{      DATE(bike\PYZus{}journeys.start\PYZus{}date),}
+         \PY{l+s+s2}{      bike\PYZus{}journeys.bike\PYZus{}number ) AS Matching\PYZus{}table}
+         \PY{l+s+s2}{  GROUP BY}
+         \PY{l+s+s2}{    DATE(Matching\PYZus{}table.start\PYZus{}date),}
+         \PY{l+s+s2}{    Matching\PYZus{}table.bike\PYZus{}number,}
+         \PY{l+s+s2}{    Matching\PYZus{}table.Totalrides}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PYZpc{}\PYZpc{}bash \PYZhy{}s \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}q\PYZus{}tourist\PYZus{}terr}\PY{l+s+s2}{\PYZdq{}}
+         ! bq query \PYZhy{}\PYZhy{}use\PYZus{}legacy\PYZus{}sql\PY{o}{=}FALSE \PYZhy{}\PYZhy{}format\PY{o}{=}csv \PYZhy{}\PYZhy{}max\PYZus{}rows\PY{o}{=}\PY{l+m}{10000} \PY{l+s+s2}{\PYZdq{}}\PY{n+nv}{\PYZdl{}1}\PY{l+s+s2}{\PYZdq{}} \PYZgt{} tourist\PYZus{}territory.csv
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Waiting on bqjob\_r60b4e2d0669e4746\_00000164107c304f\_1 {\ldots} (8s) Current status: DONE   
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{tourist\PYZus{}territory} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tourist\PYZus{}territory.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{hist} \PY{o}{=} \PY{n}{tourist\PYZus{}territory}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution of Bike Days by Percentage of rides in Tourist Territory}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} Text(0.5,0.98,'Distribution of Bike Days by Percentage of rides in Tourist Territory')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{tourist\PYZus{}territory\PYZus{}avg} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{tourist\PYZus{}territory}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{tourist\PYZus{}territory}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Totalrides}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{For bikes that begin the weekend day at a tourist dock, }\PY{l+s+si}{\PYZob{}:.1f\PYZcb{}}\PY{l+s+si}{\PYZpc{} o}\PY{l+s+s2}{f their subsequent routes are between tourist docks.}\PY{l+s+s2}{\PYZdq{}}
+               \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tourist\PYZus{}territory\PYZus{}avg}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tourist\PYZus{}legs\PYZus{}day} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{tourist\PYZus{}territory}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{314} \PY{c+c1}{\PYZsh{} There are 314 weekend days in the database}
+         \PY{n}{tourist\PYZus{}legs\PYZus{}day\PYZus{}bike} \PY{o}{=} \PY{n}{tourist\PYZus{}legs\PYZus{}day}\PY{o}{/}\PY{l+m+mi}{86} \PY{c+c1}{\PYZsh{} Average number of unique bikes in service during weekend peak}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{On average, there are }\PY{l+s+si}{\PYZob{}:.0f\PYZcb{}}\PY{l+s+s2}{ tourist legs completed per weekend day.  That works out to about }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{ routes per bike per day.}\PY{l+s+s2}{\PYZdq{}}
+              \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{tourist\PYZus{}legs\PYZus{}day}\PY{p}{,} \PY{n}{tourist\PYZus{}legs\PYZus{}day\PYZus{}bike}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+For bikes that begin the weekend day at a tourist dock, 58.9\% of their subsequent routes are between tourist docks.
+On average, there are 20 tourist legs completed per weekend day.  That works out to about 0.24 routes per bike per day.
+
+    \end{Verbatim}
+
+    \subsubsection{Tourist Analysis and
+Recommendation}\label{tourist-analysis-and-recommendation}
+
+For a bike that starts the day at noon in a tourist dock, 3 out of 5
+rides that day will be between tourist waypoints-\/-almost the same
+percentage as commuters. However, the volume of rides is much lower -
+only 20 intra-tourist rides per day, and a quart of a ride on averager
+per bike per day. This doesn't seem like sufficient volume to justify a
+special offer, although maybe if it were just limited to bikes that
+start at the Ferry Building or Embarcadero at Sansome, that would
+suffice as riding between those stops are the two most popular rides for
+a nice weekend excursion.
+
+\subsection{Final Recommendations}\label{final-recommendations}
+
+Using the bikes as a marketing channel to attract new users could be
+effective along popular commuter routes during weekdays, as the bikes
+tend to stay in commuter territory and would be an eye-catching
+advertisement for people walking or driving to work. The benefit is less
+clear for the tourist bikes-\/-advertisements along the Embarcadero
+between AT\&T Park and Pier 39 might be better, although certainly more
+expensive.
+
+Another possibility for a promotion is a partnership with the various
+long-range commute ingresses-\/-namely BART, CalTrain and the
+Ferry-\/-as these are all the most popular stations to onboard
+commuters. Maybe a free week of GoBike rides with your train ticket,
+just to experience what it's like.
+
+Converting single-riders to subscribers seems challenging, as so many of
+the single-ride routes are clearly just for tourists in town to enjoy
+the weekend and unlikely to return. The best target for promotion would
+seem to be the people walking along the waterfront.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

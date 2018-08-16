@@ -1,0 +1,22 @@
+
+morn_start,morn_end,eve_start,eve_end,route,morning_long,morning_lat,evening_long,evening_lat,trips
+50,61,61,50,Harry Bridges Plaza (Ferry Building) / 2nd at Townsend,-122.394203,37.795392,-122.390288,37.780526,3746
+70,51,51,70,San Francisco Caltrain (Townsend at 4th) / Embarcadero at Folsom,-122.39526,37.776617,-122.391034,37.791464,2632
+70,50,50,70,San Francisco Caltrain (Townsend at 4th) / Harry Bridges Plaza (Ferry Building),-122.39526,37.776617,-122.394203,37.795392,2558
+70,55,55,70,San Francisco Caltrain (Townsend at 4th) / Temporary Transbay Terminal (Howard at Beale),-122.39526,37.776617,-122.394643,37.789756,2371
+74,61,61,74,Steuart at Market / 2nd at Townsend,-122.394434,37.794139,-122.390288,37.780526,2259
+70,74,74,70,San Francisco Caltrain (Townsend at 4th) / Steuart at Market,-122.39526,37.776617,-122.394434,37.794139,2249
+50,60,60,50,Harry Bridges Plaza (Ferry Building) / Embarcadero at Sansome,-122.394203,37.795392,-122.403234,37.80477,2154
+69,65,65,69,San Francisco Caltrain 2 (330 Townsend) / Townsend at 7th,-122.39547,37.7766,-122.402717,37.771058,2046
+70,77,77,70,San Francisco Caltrain (Townsend at 4th) / Market at Sansome,-122.39526,37.776617,-122.400811,37.789625,2025
+72,65,65,72,Civic Center BART (7th at Market) / Townsend at 7th,-122.411748,37.781039,-122.402717,37.771058,1968
+74,60,60,74,Steuart at Market / Embarcadero at Sansome,-122.394434,37.794139,-122.403234,37.80477,1897
+70,42,42,70,San Francisco Caltrain (Townsend at 4th) / Davis at Jackson,-122.39526,37.776617,-122.398436,37.79728,1881
+70,63,63,70,San Francisco Caltrain (Townsend at 4th) / Howard at 2nd,-122.39526,37.776617,-122.398108,37.786978,1881
+69,63,63,69,San Francisco Caltrain 2 (330 Townsend) / Howard at 2nd,-122.39547,37.7766,-122.398108,37.786978,1518
+55,61,61,55,Temporary Transbay Terminal (Howard at Beale) / 2nd at Townsend,-122.394643,37.789756,-122.390288,37.780526,1497
+69,51,51,69,San Francisco Caltrain 2 (330 Townsend) / Embarcadero at Folsom,-122.39547,37.7766,-122.391034,37.791464,1488
+70,56,56,70,San Francisco Caltrain (Townsend at 4th) / Beale at Market,-122.39526,37.776617,-122.397086,37.792251,1487
+69,57,57,69,San Francisco Caltrain 2 (330 Townsend) / 5th at Howard,-122.39547,37.7766,-122.405127,37.781752,1454
+50,70,70,50,Harry Bridges Plaza (Ferry Building) / San Francisco Caltrain (Townsend at 4th),-122.394203,37.795392,-122.39526,37.776617,1437
+77,64,64,77,Market at Sansome / 2nd at South Park,-122.400811,37.789625,-122.392738,37.782259,1406

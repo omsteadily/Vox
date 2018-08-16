@@ -1,0 +1,12 @@
+
+route,start_station_id,end_station_id,start_lat,start_lon,end_lat,end_lon,num_trips
+Harry Bridges Plaza (Ferry Building) / Embarcadero at Sansome,50,60,37.795392,-122.394203,37.80477,-122.403234,1617
+Embarcadero at Sansome / Harry Bridges Plaza (Ferry Building),60,50,37.80477,-122.403234,37.795392,-122.394203,925
+Embarcadero at Sansome / Embarcadero at Sansome,60,60,37.80477,-122.403234,37.80477,-122.403234,853
+Harry Bridges Plaza (Ferry Building) / Harry Bridges Plaza (Ferry Building),50,50,37.795392,-122.394203,37.795392,-122.394203,842
+Embarcadero at Bryant / Embarcadero at Sansome,54,60,37.787152,-122.388013,37.80477,-122.403234,479
+Embarcadero at Bryant / Harry Bridges Plaza (Ferry Building),54,50,37.787152,-122.388013,37.795392,-122.394203,469
+Embarcadero at Vallejo / Embarcadero at Sansome,48,60,37.799953,-122.398525,37.80477,-122.403234,469
+2nd at Townsend / Harry Bridges Plaza (Ferry Building),61,50,37.780526,-122.390288,37.795392,-122.394203,447
+Harry Bridges Plaza (Ferry Building) / Embarcadero at Vallejo,50,48,37.795392,-122.394203,37.799953,-122.398525,437
+University and Emerson / University and Emerson,35,35,37.444521,-122.163093,37.444521,-122.163093,424
